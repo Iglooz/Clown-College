@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Gloria+Hallelujah&display=swap" rel="stylesheet"> 
+    <title>Clowning Around</title>
+</head>
+<body>
+    
+    <div id="clownApp">
+        <div class="banner-image"></div>
+        <div class="container">
+
+            <h1 class="title textTitle">Clowning around?</h1>
+            <br>
+            <br>
+            
+            
+           
+            <div class="row">
+                <!--Allows user to query database for a joke, filter offensive content and save the joke to a list-->
+                <div class="col-6">
+                    <h2 class="textTitle titleSmaller">Get a joke from the database!</h2>
+                    <button type="button" class="btn btn-primary acmeFont"  @click="getJoke">New Joke</button>
+                    <button type="button" class="btn btn-primary acmeFont" @click="saveJoke(joke)">Save</button>
+                    <span class="textTitle acmeFont">NSFW filter</span>
+                    <input type="checkbox" v-model="filterForEvents">
+                    <span class="textTitle acmeFont">Kids filter</span>
+                    <input type="checkbox" v-model="filterForKids">
+                    
+                    
+                    <div :class="joke.category">
+                        <div class="jokeBox" :class="joke.category">
+                            <h1 class="textTitle jokeBox acmeFont" :class="joke.category" >{{joke.setup}} {{joke.joke}}</h1>
+                            <h1 class="textTitle jokeBox acmeFont" :class="joke.category">{{joke.delivery}}</h1>
+                        </div>
+
+                    </div>
+                    
+
+    
+                </div>
+                <!--Allows user to input their own joke and save to a list-->
+                <div class="col-6">
+                    <h2 class="textTitle titleSmaller">Write your own joke!</h2>
+                    <br>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="textTitle acmeFont">Setup</h3>
+                            <input type="text" v-model="userJokeSetup" class="input-group-text acmeFont userInputField">
+                            <br>
+                            <h3 class="textTitle acmeFont">Punchline</h3>
+                            <input type="text" v-model="userJokePunchline" class="input-group-text acmeFont userInputField">
+                            
+    
+                        </div>
+    
+                    </div>
+                    <br>
+                    
+    
+                    <button type="button" class="btn btn-primary acmeFont"  @click="saveUserJoke()">Save</button>
+                </div>
+            </div>
+
+        
+                 <!--Displays the users saved jokes and allows them to see more details by clicking on the jokes-->
+                <div class="row">
+                    <div class="col-6">
+                        <ul class="jokeInList">
+                            <li v-for="joke in jokeList" class="jokeInList acmeFont" @click="showJokeDetails(joke)">{{joke.setup}} {{joke.joke}} - {{joke.delivery}}</li>
+                        </ul>
+                    </div>
+               </div>
+               <div class="row">
+                   <div class="col-4">
+                       <div class="jokeDetails">
+                        
+                        <p class="jokeDetails acmeFont">{{jokeDetails.setup}} {{jokeDetails.joke}} {{jokeDetails.delivery}}</p>
+                        <p class="jokeDetails acmeFont">{{jokeDetails.category}} {{jokeDetails.id}}</p>
+                       </div>
+
+                   </div>
+
+               </div>
+            </div>
+
+
+        
+
+
+    </div>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src="j.js"></script>
+</body>
+</html>
